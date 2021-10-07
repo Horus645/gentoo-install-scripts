@@ -1,6 +1,12 @@
 #!/bin/sh
 
+# Make sure we are running as root:
+[ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit
+
+
 CONF_FILE=/etc/portage/make.conf
+
+#Bellow, we always make sure to only set the option if it wasn't already set
 
 grep -q "MAKEOPTS" "$CONF_FILE" && echo 'MAKEOPTS="-j12"' >> "$CONF_FILE"
 

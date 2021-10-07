@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Make sure we are running as root:
+[ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit
+
 REPOS_FILE=/etc/portage/repos.conf/gentoo.conf
 
 if  grep -q 'git' "$REPOS_FILE" 

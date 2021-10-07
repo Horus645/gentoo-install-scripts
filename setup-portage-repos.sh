@@ -5,7 +5,7 @@
 
 REPOS_FILE=/etc/portage/repos.conf/gentoo.conf
 
-if  grep -q 'git' "$REPOS_FILE" 
+if ! grep -q 'git' "$REPOS_FILE" 
 then
 	cp -v "$REPOS_FILE" "$REPOS_FILE".backup
 	# remove the entries we got with rsync
@@ -28,4 +28,3 @@ sync-openpgp-key-refresh-retry-delay-exp-base = 2
 sync-openpgp-key-refresh-retry-delay-max = 60
 sync-openpgp-key-refresh-retry-delay-mult = 4" > "$REPOS_FILE"
 fi
-

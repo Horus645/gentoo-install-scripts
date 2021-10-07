@@ -8,5 +8,6 @@ PORTAGE_FILE=/etc/portage/package.accept_keywords
 printf \
 "app-editors/neovim amd64
 dev-lisp/sbcl amd64
+app-misc/nnn amd64
 dev-lang/ghc amd64" \
 >> "$PORTAGE_FILE"

@@ -5,6 +5,8 @@
 
 PORTAGE_FILE=/etc/portage/package.accept_keywords
 
+#Note: for nnn, maybe write my own ebuild
+
 printf \
 "app-editors/neovim amd64
 dev-lisp/sbcl amd64

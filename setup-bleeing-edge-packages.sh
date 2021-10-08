@@ -9,7 +9,9 @@ PORTAGE_FILE=/etc/portage/package.accept_keywords
 
 echo \
 "app-editors/neovim amd64
+dev-util/ccls
 dev-lisp/sbcl amd64
 app-misc/nnn amd64
+x11-terms/kitty
 dev-lang/ghc amd64" \
 >> "$PORTAGE_FILE"

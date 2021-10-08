@@ -8,6 +8,9 @@ LOCAL_USE_DIR=/etc/portage/package.use
 
 echo "media-sound/pulseaudio -alsa-plugin" > "$LOCAL_USE_DIR"/pulseaudio
 echo "app-admin/doas persist" > "$LOCAL_USE_DIR"/doas
-echo "media-video/pipewire pipewire-alsa pulseaudio" > "$LOCAL_USE_DIR"/pipewire
-echo "media-video/ffmpeg sndio" > "$LOCAL_USE_DIR"/ffmpeg
-echo "media-video/mpv -xv" > "$LOCAL_USE_DIR"/mpv
+echo "media-video/pipewire pipewire-alsa echo-cancel" > "$LOCAL_USE_DIR"/pipewire
+echo "media-video/ffmpeg sndio chromium" > "$LOCAL_USE_DIR"/ffmpeg
+echo "media-video/mpv -xv -cuda" > "$LOCAL_USE_DIR"/mpv
+echo "net-libs/nodejs npm" > "$LOCAL_USE_DIR"/nodejs
+echo "app-office/libreoffice cups -googledrive" > "$LOCAL_USE_DIR"/libreoffice
+echo "media-sound/musescore -webengine" > "$LOCAL_USE_DIR"/musescore

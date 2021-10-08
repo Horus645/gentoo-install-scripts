@@ -6,6 +6,7 @@
 LOCAL_USE_DIR=/etc/portage/package.use
 [ ! -d "$LOCAL_USE_DIR" ] && mkdir -pv "$LOCAL_USE_DIR"
 
+echo "app-admin/eselect doc" > "$LOCAL_USE_DIR"/eselect
 echo "media-sound/pulseaudio -alsa-plugin" > "$LOCAL_USE_DIR"/pulseaudio
 echo "app-admin/doas persist" > "$LOCAL_USE_DIR"/doas
 echo "media-video/pipewire pipewire-alsa echo-cancel" > "$LOCAL_USE_DIR"/pipewire

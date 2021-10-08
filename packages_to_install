@@ -1,6 +1,4 @@
 app-editors/neovim
-app-admin/doas
-sys-apps/man-db
 sys-apps/ripgrep
 dev-util/ccls
 media-libs/mesa

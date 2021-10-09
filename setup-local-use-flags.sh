@@ -15,3 +15,6 @@ echo "media-video/mpv -xv -cuda" > "$LOCAL_USE_DIR"/mpv
 echo "net-libs/nodejs npm" > "$LOCAL_USE_DIR"/nodejs
 echo "app-office/libreoffice cups -googledrive" > "$LOCAL_USE_DIR"/libreoffice
 echo "media-sound/musescore -webengine" > "$LOCAL_USE_DIR"/musescore
+echo "*/* $(cpuid2cpuflags)" > "$LOCAL_USE_DIR"/00cpu-flags
+echo "sys-firmware/intel-microcode hostonly initramfs split-ucode" > "$LOCAL_USE_DIR"/intel-microcode
+echo "sys-kernel/linux-firmware initramfs redistributable" > "$LOCAL_USE_DIR"/linux-firmware

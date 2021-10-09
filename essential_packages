@@ -1,6 +1,9 @@
 app-admin/doas
 app-admin/eselect
 app-eselect/eselect-sh
+app-portage/cpuid2cpuflags
 app-portage/gentoolkit
 app-shells/dash
 sys-apps/man-db
+sys-firmware/intel-microcode
+sys-kernel/linux-firmware

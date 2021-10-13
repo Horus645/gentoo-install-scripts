@@ -11,6 +11,7 @@ echo \
 "app-editors/neovim amd64
 dev-util/ccls
 dev-lisp/sbcl amd64
+media-gfx/imv
 app-misc/nnn amd64
 x11-terms/kitty
 dev-lang/ghc amd64" \

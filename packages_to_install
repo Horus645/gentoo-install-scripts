@@ -5,6 +5,7 @@ dev-util/ccls
 dev-lang/ghc
 dev-libs/wayland
 gui-libs/wlroots
+media-gfx/imv
 media-libs/mesa
 media-libs/vulkan-loader
 media-sound/musescore

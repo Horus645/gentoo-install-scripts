@@ -1,6 +1,7 @@
 app-admin/doas
 app-admin/eselect
 app-eselect/eselect-sh
+app-eselect/eselect-repository
 app-portage/gentoolkit
 app-shells/dash
 sys-apps/man-db

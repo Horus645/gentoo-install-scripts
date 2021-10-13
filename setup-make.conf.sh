@@ -12,7 +12,7 @@ grep -q "MAKEOPTS" "$CONF_FILE" || printf '\nMAKEOPTS="-j12"\n\n' >> "$CONF_FILE
 
 #vaapi -- ?
 grep -q "USE" "$CONF_FILE" || \
-	echo 'USE="alsa dbus elogind fmmpeg gtk lua_single_target_luajit '\
+	echo 'USE="alsa curl dbus elogind fmmpeg gtk lua_single_target_luajit '\
 	'opengl pulseaudio threads vim-syntax vaapi vdpau vulkan X wayland'\
 	'-bluetooth -cdr -cuda -dvd -emacs -gnome -kde -nvidia -jack'\
 	'-lua_single_target_lua5-1 -lua_single_target_lua5-3 -lua_single_target_lua5-4'\

@@ -4,6 +4,9 @@
 [ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit
 
 ./setup-make.conf.sh
+
+emerge --verbose dev-vcs/git # after the next script we will be emerging with git
+
 ./setup-portage-repos.sh
 
 emerge --verbose app-portage/cpuid2cpuflags # we use this command in the next script

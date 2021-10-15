@@ -20,12 +20,16 @@ grep -q "USE" "$CONF_FILE" || \
 	'-video_cards_nouveau -video_cards_radeon'\
 	'-wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
 
-grep -q "ACCEPT_LICENSE" "$CONF_FILE" || printf '\nACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"\n\n'  >> "$CONF_FILE" && echo "Set license"
+grep -q "ACCEPT_LICENSE" "$CONF_FILE" || \
+	printf '\nACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"\n\n'  >> "$CONF_FILE" && \
+	echo "Set license"
 
-grep -q "GRUB_PLATFORMS" "$CONF_FILE" || echo 'GRUB_PLATFORMS="efi-64"' >> "$CONF_FILE" && echo "Set GRUB_PLATFORMS"
+grep -q "GRUB_PLATFORMS" "$CONF_FILE" || echo 'GRUB_PLATFORMS="efi-64"' >> "$CONF_FILE" \
+	&& echo "Set GRUB_PLATFORMS"
 
 grep -q "EMERGE_DEFAULT_OPTS" "$CONF_FILE" || \
-	printf '\nEMERGE_DEFAULT_OPTS="--ask --verbose --tree"\n\n' >> "$CONF_FILE" && echo "Set EMERGE_DEFAULT_OPTS"
+	printf '\nEMERGE_DEFAULT_OPTS="--ask --verbose --tree"\n\n' >> "$CONF_FILE" && \
+	echo "Set EMERGE_DEFAULT_OPTS"
 
 grep -q "PORTDIR_OVERLAY" "$CONF_FILE" || \
 	echo \
@@ -33,4 +37,5 @@ grep -q "PORTDIR_OVERLAY" "$CONF_FILE" || \
 concern that will be deleted by updates. Default is not defined.
 PORTDIR_OVERLAY=/usr/local/portage' >> "$CONF_FILE" && echo "Set PORTDIR_OVERLAY"
 
-grep -q "VIDEO_CARDS" "$CONF_FILE" || echo 'VIDEO_CARDS="amdgpu radeonsi"' >> "$CONF_FILE" && echo "Set VIDEO_CARDS"
+grep -q "VIDEO_CARDS" "$CONF_FILE" || echo 'VIDEO_CARDS="amdgpu radeonsi"' >> "$CONF_FILE" && \
+	echo "Set VIDEO_CARDS"

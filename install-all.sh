@@ -28,6 +28,10 @@ passwd horus
 
 rm --verbose /stage3-*.tar.*
 
+emerge --verbose app-misc/neofetch
+
+neofetch && echo "WE ARE IN BOOOOOOOOIS!"
+
 echo "You may now install the packages in packages_to_install. Beware, it may take a while."
 echo "Also note that you will be using mako as the notification daemon, not dunst"
 echo "VERY IMPORTANT: enable overlay guru in order to install foot as a terminal emulator"

@@ -38,3 +38,12 @@ eselect repository enable wayland-desktop
 emaint sync --repo wayland-desktop
 echo "*/*::wayland-desktop ~amd64" > /etc/portage/package.accept_keywords/wayland-desktop
 
+#emerge --verbose gui-apps/yambar
+
+
+#enable guru overlay
+eselect repository enable guru
+emaint sync --repo guru
+echo "gui-apps/foot ~amd64" > /etc/portage/package.accept_keywords/foot
+
+#emerge --verbose gui-apps/foot

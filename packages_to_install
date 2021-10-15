@@ -6,6 +6,7 @@ app-shells/zsh-completions
 app-misc/nnn
 app-text/zathura
 app-text/zathura-pdf-mupdf
+app-vim/gentoo-syntax
 dev-haskell/cabal
 dev-lang/ghc
 dev-lang/rust

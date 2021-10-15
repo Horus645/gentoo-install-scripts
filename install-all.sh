@@ -29,7 +29,7 @@ echo "Rebuilding grub..."
 grub-mkconfig -o /boot/grub/grub.cfg || exit 1
 
 ./setup-doas.sh && echo "Doas set!" || exit 1
-./setup-bleeing-edge-packages.sh && echo "Accept keywords set." || exit 1
+./setup-bleeding-edge-packages.sh && echo "Accept keywords set." || exit 1
 
 useradd -m -G users,wheel,audio,video,games,usb -s /bin/bash horus && echo "Added user horus" || exit 1
 passwd horus || exit 1

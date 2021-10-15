@@ -6,10 +6,11 @@ app-shells/zsh-completions
 app-misc/nnn
 app-text/zathura
 app-text/zathura-pdf-mupdf
-dev-util/ccls
+dev-haskell/cabal
 dev-lang/ghc
 dev-lang/rust
 dev-libs/wayland
+dev-util/ccls
 gui-apps/mako
 gui-apps/wl-clipboard
 gui-libs/wlroots

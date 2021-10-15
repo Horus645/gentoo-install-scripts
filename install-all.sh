@@ -58,4 +58,9 @@ eselect repository enable brave-overlay
 emaint sync --repo brave-overlay
 emerge --verbose www-client/brave-bin
 
+#getting hls
+eselect repository enable haskell
+emaint sync --repo haskell
+echo "dev-util/haskell-language-server ~amd64" > /etc/portage/package.accept_keywords/haskell-language-server
 
+emerge --verbose dev-util/haskell-language-server

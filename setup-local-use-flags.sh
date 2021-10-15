@@ -20,3 +20,5 @@ echo "net-libs/nodejs npm" > "$LOCAL_USE_DIR"/nodejs
 echo "media-video/pipewire pipewire-alsa echo-cancel" > "$LOCAL_USE_DIR"/pipewire
 echo "media-sound/pulseaudio -alsa-plugin" > "$LOCAL_USE_DIR"/pulseaudio
 echo "media-gfx/imv freeimage heif gif jpeg png svg tiff -X" > "$LOCAL_USE_DIR"/imv
+echo "gui-apps/mako icons" > "$LOCAL_USE_DIR"/mako
+echo "app-shells/zsh doc gdbm unicode" > "$LOCAL_USE_DIR"/zsh

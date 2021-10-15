@@ -29,3 +29,12 @@ passwd horus
 rm --verbose /stage3-*.tar.*
 
 echo "You may now install the packages in packages_to_install. Beware, it may take a while."
+echo "Also note that you will be using mako as the notification daemon, not dunst"
+echo "VERY IMPORTANT: enable overlay guru in order to install foot as a terminal emulator"
+echo "VERY IMPORTANT: enable overlay wayland-desktop in order to install yambar"
+
+#enable the wayland overlay
+eselect repository enable wayland-desktop
+emaint sync --repo wayland-desktop
+echo "*/*::wayland-desktop ~amd64" > /etc/portage/package.accept_keywords/wayland-desktop
+

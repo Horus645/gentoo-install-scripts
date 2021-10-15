@@ -1,9 +1,16 @@
-app-office/libreoffice
 app-editors/neovim
+app-office/libreoffice
+app-shells/gentoo-zsh-completions
+app-shells/zsh
+app-shells/zsh-completions
 app-misc/nnn
+app-text/zathura
+app-text/zathura-pdf-mupdf
 dev-util/ccls
 dev-lang/ghc
 dev-libs/wayland
+gui-apps/mako
+gui-apps/wl-clipboard
 gui-libs/wlroots
 media-gfx/imv
 media-libs/mesa
@@ -15,6 +22,4 @@ media-video/mpv
 media-video/pipewire
 net-libs/nodejs
 sys-apps/ripgrep
-x11-misc/dunst
-x11-terms/kitty
 x11-drivers/xf86-video-amdgpu

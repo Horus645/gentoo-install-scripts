@@ -12,7 +12,7 @@ emerge --verbose dev-vcs/git # after the next script we will be emerging with gi
 emerge --verbose app-portage/cpuid2cpuflags # we use this command in the next script
 ./setup-local-use-flags.sh
 
-tr '\n' ' ' < ./essential_packages || xargs emerge -avt 
+tr '\n' ' ' < essential_packages || xargs emerge -avt 
 
 eselect sh set dash && echo "Shell changed to dash!" # set our shell as dash
 eselect sh list
@@ -32,35 +32,44 @@ emerge --verbose app-misc/neofetch
 
 neofetch && echo "WE ARE IN BOOOOOOOOIS!"
 
-echo "You may now install the packages in packages_to_install. Beware, it may take a while."
-echo "Also note that you will be using mako as the notification daemon, not dunst"
-echo "VERY IMPORTANT: enable overlay guru in order to install foot as a terminal emulator"
-echo "VERY IMPORTANT: enable overlay wayland-desktop in order to install yambar"
+sleep 5 # let user catch their breath
 
-#enable the wayland overlay
-eselect repository enable wayland-desktop
-emaint sync --repo wayland-desktop
-echo "*/*::wayland-desktop ~amd64" > /etc/portage/package.accept_keywords/wayland-desktop
+while true; do
+	echo "Would you like to install the packages from Gentoo's default repository now?[y/n]"
+	read  -r answer
+	case $answer in
+		[yY]*)
+			./install_general_packages.sh
+			break
+			;;
+		[nN]*)
+			echo "You may install the packages at a later date by running './install_general_packages.sh'"
+			echo "Exiting..."
+			break
+			;;
+		*)
+			echo "Don't be a bitch; type either 'y' or 'n'."
+			;;
+	esac
 
-#emerge --verbose gui-apps/yambar
+done
 
+while true; do
+	echo "Would you like to install the packages from Gentoo's overlays?[y/n]"
+	read  -r answer
+	case $answer in
+		[yY]*)
+			./install_packages_from_overlays.sh
+			break
+			;;
+		[nN]*)
+			echo "You may install the packages at a later date by running './install_packages_from_overlays.sh'"
+			echo "Exiting..."
+			break
+			;;
+		*)
+			echo "Don't be a bitch; type either 'y' or 'n'."
+			;;
+	esac
 
-#enable guru overlay
-eselect repository enable guru
-emaint sync --repo guru
-echo "gui-apps/foot ~amd64" > /etc/portage/package.accept_keywords/foot
-
-#emerge --verbose gui-apps/foot dev-util/rust-analyzer
-#echo "dev-util/rust-analyzer" > /etc/portage/package.accept_keywords/rust-analyzer
-
-#getting brave:
-eselect repository enable brave-overlay
-emaint sync --repo brave-overlay
-emerge --verbose www-client/brave-bin
-
-#getting hls
-eselect repository enable haskell
-emaint sync --repo haskell
-echo "dev-util/haskell-language-server ~amd64" > /etc/portage/package.accept_keywords/haskell-language-server
-
-emerge --verbose dev-util/haskell-language-server
+done

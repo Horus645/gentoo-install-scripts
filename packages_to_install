@@ -8,6 +8,7 @@ app-text/zathura
 app-text/zathura-pdf-mupdf
 dev-util/ccls
 dev-lang/ghc
+dev-lang/rust
 dev-libs/wayland
 gui-apps/mako
 gui-apps/wl-clipboard

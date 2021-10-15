@@ -50,4 +50,12 @@ eselect repository enable guru
 emaint sync --repo guru
 echo "gui-apps/foot ~amd64" > /etc/portage/package.accept_keywords/foot
 
-#emerge --verbose gui-apps/foot
+#emerge --verbose gui-apps/foot dev-util/rust-analyzer
+#echo "dev-util/rust-analyzer" > /etc/portage/package.accept_keywords/rust-analyzer
+
+#getting brave:
+eselect repository enable brave-overlay
+emaint sync --repo brave-overlay
+emerge --verbose www-client/brave-bin
+
+

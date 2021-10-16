@@ -35,7 +35,7 @@ passwd horus || exit 1
 
 rm --verbose /stage3-*.tar.* || exit 1
 
-./configure-system.sh || exit 1
+./configure_base_system.sh || exit 1
 
 emerge --verbose app-misc/neofetch || exit 1
 neofetch && echo "WE ARE IN BOOOOOOOOIS!" || exit 1
@@ -47,11 +47,12 @@ while true; do
 	read  -r answer
 	case $answer in
 		[yY]*)
-			./install_general_packages.sh
+			./install_general_packages.sh && ./configure_general_packages.sh
 			break
 			;;
 		[nN]*)
 			echo "You may install the packages at a later date by running './install_general_packages.sh'"
+			echo "Remember to also set up the configuration by running './configure_general_packages.sh'"
 			echo "Exiting..."
 			break
 			;;

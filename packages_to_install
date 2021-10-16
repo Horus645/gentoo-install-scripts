@@ -25,4 +25,5 @@ media-video/mpv
 media-video/pipewire
 net-libs/nodejs
 sys-apps/ripgrep
+sys-process/bottom
 x11-drivers/xf86-video-amdgpu

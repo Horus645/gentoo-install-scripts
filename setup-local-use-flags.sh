@@ -23,3 +23,4 @@ echo "media-gfx/imv freeimage heif gif jpeg png svg tiff -X" > "$LOCAL_USE_DIR"/
 echo "gui-apps/mako icons" > "$LOCAL_USE_DIR"/mako
 echo "app-shells/zsh doc gdbm unicode" > "$LOCAL_USE_DIR"/zsh
 echo "dev-lang/rust nightly rls system-llvm verify-sig -clippy -miri -parallel-compiler -rustfmt -wasm" > "$LOCAL_USE_DIR"/rust
+echo "sys-process/bottom -battery" > "$LOCAL_USE_DIR"/bottom

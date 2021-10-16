@@ -7,17 +7,14 @@ ACCEPT_KEYWORDS_DIR="/etc/portage/package.accept_keywords"
 
 # Bellow, we always make sure to only unmask the packages we need
 
-# from the wayland overlay
-eselect repository enable wayland-desktop && emaint sync --repo wayland-desktop && \
-echo "gui-apps/yambar ~amd64" > "$ACCEPT_KEYWORDS_DIR"/wayland-desktop && \
-emerge --verbose gui-apps/yambar
-
-
 # from the guru overlay
 eselect repository enable guru && emaint sync --repo guru && \
 echo "gui-apps/foot ~amd64" > "$ACCEPT_KEYWORDS_DIR"/foot && \
 echo "dev-util/rust-analyzer ~amd64" > "$ACCEPT_KEYWORDS_DIR"/rust-analyzer && \
-emerge --verbose gui-apps/foot dev-util/rust-analyzer
+echo "gui-apps/yambar ~amd64" > "$ACCEPT_KEYWORDS_DIR"/yambar && \
+emerge --verbose gui-apps/foot gui-apps/yambar dev-util/rust-analyzer
+
+echo "You must set up yambar."
 
 # getting brave:
 eselect repository enable brave-overlay && emaint sync --repo brave-overlay && \

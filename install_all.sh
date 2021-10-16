@@ -28,7 +28,6 @@ sleep 5 # let the user see we've changed it
 echo "Rebuilding grub..."
 grub-mkconfig -o /boot/grub/grub.cfg || exit 1
 
-./setup_doas.sh && echo "Doas configured!" || exit 1
 ./setup_bleeding_edge_packages.sh && echo "Accept keywords set." || exit 1
 
 useradd -m -G users,wheel,audio,video,games,usb -s /bin/bash horus && echo "Added user horus" || exit 1
@@ -36,8 +35,9 @@ passwd horus || exit 1
 
 rm --verbose /stage3-*.tar.* || exit 1
 
-emerge --verbose app-misc/neofetch || exit 1
+./configure-system.sh || exit 1
 
+emerge --verbose app-misc/neofetch || exit 1
 neofetch && echo "WE ARE IN BOOOOOOOOIS!" || exit 1
 
 sleep 5 # let user catch their breath

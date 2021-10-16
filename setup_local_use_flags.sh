@@ -21,6 +21,7 @@ echo "media-video/pipewire pipewire-alsa echo-cancel" > "$LOCAL_USE_DIR"/pipewir
 echo "media-sound/pulseaudio -alsa-plugin" > "$LOCAL_USE_DIR"/pulseaudio
 echo "media-gfx/imv freeimage heif gif jpeg png svg tiff -X" > "$LOCAL_USE_DIR"/imv
 echo "gui-apps/mako icons" > "$LOCAL_USE_DIR"/mako
+echo "gui-apps/yambar wayland -X" > "$LOCAL_USE_DIR"/yambar
 echo "app-shells/zsh doc gdbm unicode" > "$LOCAL_USE_DIR"/zsh
 echo "dev-lang/rust nightly rls system-llvm verify-sig -clippy -miri -parallel-compiler -rustfmt -wasm" > "$LOCAL_USE_DIR"/rust
 echo "sys-process/bottom -battery" > "$LOCAL_USE_DIR"/bottom

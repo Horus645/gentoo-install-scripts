@@ -6,5 +6,3 @@
 echo "permit nopass horus cmd reboot"
 echo "permit nopass horus cmd poweroff") > /etc/doas.conf \
 	&& echo "Doas configured!" || exit 1
-
-

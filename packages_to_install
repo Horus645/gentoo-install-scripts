@@ -11,6 +11,7 @@ dev-haskell/cabal
 dev-lang/ghc
 dev-lang/rust
 dev-libs/wayland
+dev-libs/bemenu
 dev-util/ccls
 gui-apps/mako
 gui-apps/wl-clipboard

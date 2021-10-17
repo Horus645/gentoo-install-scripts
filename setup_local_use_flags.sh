@@ -25,3 +25,4 @@ echo "gui-apps/yambar wayland -X" > "$LOCAL_USE_DIR"/yambar
 echo "app-shells/zsh doc gdbm unicode" > "$LOCAL_USE_DIR"/zsh
 echo "dev-lang/rust nightly rls system-llvm verify-sig -clippy -miri -parallel-compiler -rustfmt -wasm" > "$LOCAL_USE_DIR"/rust
 echo "sys-process/bottom -battery" > "$LOCAL_USE_DIR"/bottom
+echo "dev-libs/bemenu -X" > "$LOCAL_USE_DIR"/bemenu

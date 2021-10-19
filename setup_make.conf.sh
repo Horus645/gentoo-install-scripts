@@ -1,4 +1,6 @@
 #!/bin/sh
+# We will be printing some '\' literals, so let's disable this warning
+#shellcheck disable=SC1004
 
 # Make sure we are running as root:
 [ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit
@@ -12,13 +14,12 @@ grep -q "MAKEOPTS" "$CONF_FILE" || echo 'MAKEOPTS="-j12"' >> "$CONF_FILE" && ech
 
 #vaapi -- ?
 grep -q "USE" "$CONF_FILE" || \
-	echo 'USE="alsa curl dbus elogind fmmpeg gtk lua_single_target_luajit magic'\
-	'opengl pulseaudio qt5 threads vim-syntax vaapi vdpau vulkan X xwayland wayland'\
-	'-bluetooth -cdr -cuda -dvd -emacs -gnome -kde -nvidia -jack'\
-	'-lua_single_target_lua5-1 -lua_single_target_lua5-3 -lua_single_target_lua5-4'\
-	'-systemd'\
-	'-video_cards_nouveau -video_cards_radeon'\
-	'-wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
+	echo \
+'USE="alsa curl dbus elogind fmmpeg gtk lua_single_target_luajit magic \
+opengl pulseaudio qt5 threads vim-syntax vaapi vdpau vulkan X xwayland wayland \
+-bluetooth -cdr -cuda -dvd -emacs -gnome -kde -nvidia -jack \
+-lua_single_target_lua5-1 -lua_single_target_lua5-3 -lua_single_target_lua5-4 \
+-systemd -video_cards_nouveau -video_cards_radeon -wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
 
 grep -q "ACCEPT_LICENSE" "$CONF_FILE" || \
 	echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"'  >> "$CONF_FILE" && \

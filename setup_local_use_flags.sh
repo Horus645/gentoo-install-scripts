@@ -24,5 +24,6 @@ echo "media-video/mpv -xv -cuda" > "$LOCAL_USE_DIR"/mpv
 echo "media-video/pipewire pipewire-alsa echo-cancel" > "$LOCAL_USE_DIR"/pipewire
 echo "net-libs/nodejs npm" > "$LOCAL_USE_DIR"/nodejs
 echo "sys-firmware/intel-microcode hostonly initramfs split-ucode" > "$LOCAL_USE_DIR"/intel-microcode
+echo "sys-fs/ntfs3g suid acl xattr" > "$LOCAL_USE_DIR"/ntfs3g
 echo "sys-kernel/linux-firmware initramfs redistributable" > "$LOCAL_USE_DIR"/linux-firmware
 echo "sys-process/bottom -battery" > "$LOCAL_USE_DIR"/bottom

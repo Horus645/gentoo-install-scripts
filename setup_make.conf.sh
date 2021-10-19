@@ -17,9 +17,9 @@ grep -q "USE" "$CONF_FILE" || \
 	echo \
 'USE="alsa curl dbus elogind fmmpeg gtk lua_single_target_luajit magic \
 opengl pulseaudio qt5 threads vim-syntax vaapi vdpau vulkan X xwayland wayland \
--bluetooth -cdr -cuda -dvd -emacs -gnome -kde -nvidia -jack \
+-bluetooth -cdda -cdr -css -cuda -dvd -dvdr -emacs -gnome -kde -nvidia -jack \
 -lua_single_target_lua5-1 -lua_single_target_lua5-3 -lua_single_target_lua5-4 \
--systemd -video_cards_nouveau -video_cards_radeon -wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
+-networkmanager -systemd -telemetry -wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
 
 grep -q "ACCEPT_LICENSE" "$CONF_FILE" || \
 	echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"'  >> "$CONF_FILE" && \
@@ -38,5 +38,5 @@ grep -q "PORTDIR_OVERLAY" "$CONF_FILE" || \
 concern that will be deleted by updates. Default is not defined.
 PORTDIR_OVERLAY=/usr/local/portage' >> "$CONF_FILE" && echo "Set PORTDIR_OVERLAY"
 
-grep -q "VIDEO_CARDS" "$CONF_FILE" || echo 'VIDEO_CARDS="amdgpu radeonsi"' >> "$CONF_FILE" && \
+grep -q "VIDEO_CARDS" "$CONF_FILE" || echo 'VIDEO_CARDS="-* amdgpu radeonsi"' >> "$CONF_FILE" && \
 	echo "Set VIDEO_CARDS"

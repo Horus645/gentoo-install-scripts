@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Note, if any of the commands bellow fail, we exit immediately, ALWAYS
-# This is because if anything fails it could lead to an actual catastrophy
+# This is because if anything fails it could lead to an actual catastrophe
 
 # Make sure we are running as root:
 [ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit 1

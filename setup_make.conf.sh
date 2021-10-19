@@ -10,6 +10,8 @@ CONF_FILE=/etc/portage/make.conf
 
 # Bellow, we always make sure to only set the option if it wasn't already set
 
+# also set the CFLAGS -> "-march=skylake -O2 -pipe"
+
 grep -q "MAKEOPTS" "$CONF_FILE" || echo 'MAKEOPTS="-j12"' >> "$CONF_FILE" && echo "Set MAKEOPTS"
 
 #vaapi -- ?

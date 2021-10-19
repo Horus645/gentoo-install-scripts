@@ -6,9 +6,13 @@
 LOCAL_USE_DIR=/etc/portage/package.use
 [ ! -d "$LOCAL_USE_DIR" ] && mkdir -pv "$LOCAL_USE_DIR"
 
+echo \
+"*/* LUA_TARGETS: lua5-3
+*/* LUA_SINGLE_TARGET: -* lua5-3" > $LOCAL_USE_DIR/lua
 echo "*/* $(cpuid2cpuflags)" > "$LOCAL_USE_DIR"/00cpu-flags
 echo "app-admin/doas persist" > "$LOCAL_USE_DIR"/doas
 echo "app-admin/eselect doc" > "$LOCAL_USE_DIR"/eselect
+echo "app-editors/neovim LUA_SINGLE_TARGET: -* luajit" > "$LOCAL_USE_DIR"/neovim
 echo "app-office/libreoffice cups -googledrive" > "$LOCAL_USE_DIR"/libreoffice
 echo "app-shells/zsh doc gdbm unicode" > "$LOCAL_USE_DIR"/zsh
 echo "dev-lang/rust nightly rls system-llvm verify-sig -clippy -miri -parallel-compiler -rustfmt -wasm" > "$LOCAL_USE_DIR"/rust

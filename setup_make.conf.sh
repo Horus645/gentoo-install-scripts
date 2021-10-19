@@ -15,10 +15,9 @@ grep -q "MAKEOPTS" "$CONF_FILE" || echo 'MAKEOPTS="-j12"' >> "$CONF_FILE" && ech
 #vaapi -- ?
 grep -q "USE" "$CONF_FILE" || \
 	echo \
-'USE="alsa curl dbus elogind fmmpeg gtk lua_single_target_luajit magic \
+'USE="alsa curl dbus elogind fmmpeg gtk magic \
 opengl pulseaudio qt5 threads vim-syntax vaapi vdpau vulkan X xwayland wayland \
 -bluetooth -cdda -cdr -css -cuda -dvd -dvdr -emacs -gnome -kde -nvidia -jack \
--lua_single_target_lua5-1 -lua_single_target_lua5-3 -lua_single_target_lua5-4 \
 -networkmanager -systemd -telemetry -wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
 
 grep -q "ACCEPT_LICENSE" "$CONF_FILE" || \

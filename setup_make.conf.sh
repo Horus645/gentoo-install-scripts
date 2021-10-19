@@ -8,7 +8,7 @@ CONF_FILE=/etc/portage/make.conf
 
 # Bellow, we always make sure to only set the option if it wasn't already set
 
-grep -q "MAKEOPTS" "$CONF_FILE" || printf '\nMAKEOPTS="-j12"\n\n' >> "$CONF_FILE" && echo "Set MAKEOPTS"
+grep -q "MAKEOPTS" "$CONF_FILE" || echo 'MAKEOPTS="-j12"' >> "$CONF_FILE" && echo "Set MAKEOPTS"
 
 #vaapi -- ?
 grep -q "USE" "$CONF_FILE" || \
@@ -21,14 +21,14 @@ grep -q "USE" "$CONF_FILE" || \
 	'-wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
 
 grep -q "ACCEPT_LICENSE" "$CONF_FILE" || \
-	printf '\nACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"\n\n'  >> "$CONF_FILE" && \
+	echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"'  >> "$CONF_FILE" && \
 	echo "Set license"
 
 grep -q "GRUB_PLATFORMS" "$CONF_FILE" || echo 'GRUB_PLATFORMS="efi-64"' >> "$CONF_FILE" \
 	&& echo "Set GRUB_PLATFORMS"
 
 grep -q "EMERGE_DEFAULT_OPTS" "$CONF_FILE" || \
-	printf '\nEMERGE_DEFAULT_OPTS="--ask --verbose --tree"\n\n' >> "$CONF_FILE" && \
+	echo 'MERGE_DEFAULT_OPTS="--ask --verbose --tree"' >> "$CONF_FILE" && \
 	echo "Set EMERGE_DEFAULT_OPTS"
 
 grep -q "PORTDIR_OVERLAY" "$CONF_FILE" || \

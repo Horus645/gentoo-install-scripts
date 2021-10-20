@@ -31,3 +31,4 @@ echo "sys-firmware/intel-microcode hostonly initramfs split-ucode" > "$LOCAL_USE
 echo "sys-fs/ntfs3g suid acl xattr" > "$LOCAL_USE_DIR"/ntfs3g
 echo "sys-kernel/linux-firmware initramfs redistributable" > "$LOCAL_USE_DIR"/linux-firmware
 echo "sys-process/bottom -battery" > "$LOCAL_USE_DIR"/bottom
+echo "ys-process/cronie anacron" > "$LOCAL_USE_DIR"/cronie

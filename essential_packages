@@ -6,4 +6,3 @@ app-portage/gentoolkit
 app-shells/dash
 sys-apps/man-db
 sys-firmware/intel-microcode
-sys-kernel/linux-firmware

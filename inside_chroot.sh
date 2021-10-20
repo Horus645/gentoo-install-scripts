@@ -19,7 +19,7 @@ emerge --verbose --update --deep --newuse @world
 
 echo "Setting up /etc/portage/make.conf..."
 #this is AFTER the previous command because that one is meant to update according to our profile
-./setup_make.conf.sh && exit 1
+./setup_make.conf.sh || exit 1
 echo "...done."
 
 # we use this command in the next script
@@ -44,7 +44,7 @@ eselect locale list | grep "en_US.UTF-8 UTF-8" | sed 's/\([0-9]\).*/\1/' | tr -d
 eselect locale list && sleep 5 # let the user see the selected locale
 
 #this might be set later on...
-#echo 'keymap="br-abnt2"' > /etc/conf.d/keymaps && echo "Set keymap"
+#echo '' > /etc/conf.d/keymaps && echo "Set keymap"
 
 env-update && . /etc/profile && export PS1="(chroot) ${PS1}"
 
@@ -55,4 +55,78 @@ eselect kernel list && sleep 5
 
 
 cd /usr/src/linux || exit 1
-echo "Run 'make menuconfig' in order to start configuring the kernel"
+make menuconfig
+
+while true; do
+	echo "Are you ready to build the kernel[y/n]?"
+	read  -r answer
+	case $answer in
+		[yY]*)
+			break
+			;;
+		[nN]*)
+			make menuconfig
+			;;
+		*)
+			echo "Don't be a bitch; type either 'y' or 'n'."
+			;;
+	esac
+done
+
+make -j12 && make -j12 modules_install
+make install
+
+emerge --verbose sys-kernel/genkernel sys-kernel/linux-firmware
+echo "Generating initramfs..."
+genkernel --install --kernel-config=./.config initramfs || exit 1
+echo "...done."
+
+lsblk
+blkid
+echo "You will now edit the fstab file. Make sure to take note of the above. When ready, press any key."
+read -r
+nano -w /etc/fstab
+
+echo "Now you will set the hostname. Press any key to continue."
+read -r
+nano -w /etc/conf.d/hostname
+
+emerge --verbose --noreplace net-misc/netifrc
+echo 'Now set config_eth0="dhcp". Press any key'
+read -r
+nano -w /etc/conf.d/net
+
+cd /etc/init.d || exit 1
+ln -s net.lo net.eth0
+rc-update add net.eth0 default
+
+echo "Now you will edit the hosts file"
+echo "A good idea is to set it to <hostname>.homenetwork <hostname> localhost"
+echo "Press any key"
+read -r
+nano -w /etc/hosts
+
+echo "You will now select the keymap."
+echo 'You probably want keymap="br-abnt2"'
+echo "Press any key"
+read -r
+nano -w /etc/conf.d/keymaps
+
+echo "You will now review rc.conf. Press any key"
+read -r
+nano -w /etc/rc.conf
+
+echo "Finally, you will review the hwclock. Press any key"
+read -r
+nano -w /etc/conf.d/hwclock
+
+
+emerge --verbose app-admin/sysklogd && rc-update add sysklogd default
+emerge --verbose net-misc/dhcpcd
+
+emerge --verbose sys-process/cronie && rc-update add cronie default
+
+emerge --verbose sys-boot/grub:2 && grub-mkconfig -o /boot/grub/grub.cfg
+
+echo "Run 'passwd' before exiting in order to setup the passwd"
+echo "Afterwards, exit, cd, umount everything and reboot"

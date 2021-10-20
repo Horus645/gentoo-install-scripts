@@ -1,4 +1,6 @@
 #!/bin/sh
+# This is meant to be the first script ran after we've rebooted into the system
+# That is, once the live usb has been removed
 
 # Note, if any of the commands bellow fail, we exit immediately, ALWAYS
 # This is because if anything fails it could lead to an actual catastrophe
@@ -6,18 +8,11 @@
 # Make sure we are running as root:
 [ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit 1
 
-echo "Setting up /etc/portage/make.conf..."
-./setup_make.conf.sh && echo "...done." || exit 1
-
 # after the next script we will be emerging with git, so we need to get it now
 emerge --verbose dev-vcs/git || exit 1
-
 ./setup_portage_repos.sh && echo "Changed sync operation to git." || exit 1
 
-# we use this command in the next script
-emerge --verbose app-portage/cpuid2cpuflags || exit 1
-./setup_local_use_flags.sh && echo "Local use flags set up." || exit 1
-
+# emerging essential packages
 tr '\n' ' ' < essential_packages | xargs emerge -avt || exit 1
 
 eselect sh set dash && echo "Shell changed to dash!" || exit 1

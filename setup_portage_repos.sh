@@ -27,4 +27,5 @@ sync-openpgp-key-refresh-retry-overall-timeout = 1200
 sync-openpgp-key-refresh-retry-delay-exp-base = 2
 sync-openpgp-key-refresh-retry-delay-max = 60
 sync-openpgp-key-refresh-retry-delay-mult = 4" > "$REPOS_FILE"
+	emerge -sync
 fi

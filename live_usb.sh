@@ -54,4 +54,7 @@ mount -v --make-rslave /mnt/gentoo/dev
 mount -v --bind /run /mnt/gentoo/run
 mount -v --make-slave /mnt/gentoo/run
 
-chroot /mnt/gentoo /bin/bash --init-file ./inside_chroot.sh
+chroot /mnt/gentoo /bin/bash --init-file ./inside_chroot.sh && cd && \
+	umount -v -l /mnt/gentoo/dev/shm && umount -v -l /mnt/gentoo/dev/pts && \
+	umount -v -R /mnt/gentoo && reboot \
+	|| echo "Something went wrong, you will have to continue manually"

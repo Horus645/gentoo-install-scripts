@@ -112,6 +112,9 @@ echo "Press any key"
 read -r
 nano -w /etc/conf.d/keymaps
 
+echo "Type the root password:"
+passwd
+
 echo "You will now review rc.conf. Press any key"
 read -r
 nano -w /etc/rc.conf
@@ -127,6 +130,3 @@ emerge --verbose net-misc/dhcpcd
 emerge --verbose sys-process/cronie && rc-update add cronie default
 
 emerge --verbose sys-boot/grub:2 && grub-mkconfig -o /boot/grub/grub.cfg
-
-echo "Run 'passwd' before exiting in order to setup the passwd"
-echo "Afterwards, exit, cd, umount everything and reboot"

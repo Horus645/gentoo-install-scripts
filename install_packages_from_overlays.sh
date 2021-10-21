@@ -25,4 +25,7 @@ eselect repository enable haskell && emaint sync --repo haskell && \
 echo "dev-util/haskell-language-server ~amd64" > "$ACCEPT_KEYWORDS_DIR"/haskell-language-server && \
 emerge --verbose dev-util/haskell-language-server
 
-# missing: steam
+# steam:
+eselect repository enable steam-overlay && emaint sync --repo steam-overlay && \
+echo "Installing steam can be a lot more hands on." && \
+echo "The overlay has been set, but I recommend the actual merge to be done manually"

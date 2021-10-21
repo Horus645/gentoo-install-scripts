@@ -47,10 +47,8 @@ emerge --verbose sys-kernel/gentoo-sources app-arch/lz4
 eselect kernel set 1
 eselect kernel list && sleep 5
 
-
 cd /usr/src/linux || exit 1
 make menuconfig
-
 while true; do
 	echo "Are you ready to compile the kernel[y/n]?"
 	read  -r answer
@@ -66,7 +64,6 @@ while true; do
 			;;
 	esac
 done
-
 make -j12 && make -j12 modules_install
 make install
 
@@ -118,7 +115,6 @@ nano -w /etc/rc.conf
 echo "Finally, you will review the hwclock. Press enter"
 read -r
 nano -w /etc/conf.d/hwclock
-
 
 emerge --verbose app-admin/sysklogd && rc-update add sysklogd default
 emerge --verbose net-misc/dhcpcd

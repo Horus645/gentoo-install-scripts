@@ -1,6 +1,5 @@
 #!/bin/sh
 # This script will run inside the chrooted environment
-# It stops when we need to configure the kernel
 
 . /etc/profile
 export PS1="(chroot) ${PS1}"
@@ -26,9 +25,7 @@ echo "...done."
 emerge --verbose app-portage/cpuid2cpuflags || exit 1
 ./setup_local_use_flags.sh && echo "Local use flags set up." || exit 1
 
-echo "Brazil/East" > /etc/timezone #verify this
-
-emerge --config sys-libs/timezone-data
+echo "Brazil/East" > /etc/timezone && emerge --config sys-libs/timezone-data
 
 echo \
 "en_US ISO-8859-1
@@ -43,9 +40,6 @@ eselect locale list | grep "en_US.UTF-8 UTF-8" | sed 's/\([0-9]\).*/\1/' | tr -d
 
 eselect locale list && sleep 5 # let the user see the selected locale
 
-#this might be set later on...
-#echo '' > /etc/conf.d/keymaps && echo "Set keymap"
-
 env-update && . /etc/profile && export PS1="(chroot) ${PS1}"
 
 emerge --verbose sys-kernel/gentoo-sources app-arch/lz4
@@ -58,7 +52,7 @@ cd /usr/src/linux || exit 1
 make menuconfig
 
 while true; do
-	echo "Are you ready to build the kernel[y/n]?"
+	echo "Are you ready to compile the kernel[y/n]?"
 	read  -r answer
 	case $answer in
 		[yY]*)
@@ -83,13 +77,15 @@ echo "...done."
 
 lsblk
 blkid
-echo "You will now edit the fstab file. Make sure to take note of the above. When ready, press any key."
+echo "You will now edit the fstab file. Make sure to take note of the above. When ready, press enter."
 read -r
 nano -w /etc/fstab
 
-echo "Now you will set the hostname. Press any key to continue."
-read -r
-nano -w /etc/conf.d/hostname
+echo "Type in the desired hostname:"
+read -r TYPED_HOSTNAME
+echo \
+"# Hostname fallback if /etc/hostname does not exit
+hostname=\"${TYPED_HOSTNAME}\"" > /etc/conf.d/hostname && echo 'hostname set'
 
 emerge --verbose --noreplace net-misc/netifrc
 echo 'Now set config_eth0="dhcp". Press any key'
@@ -102,24 +98,24 @@ rc-update add net.eth0 default
 
 echo "Now you will edit the hosts file"
 echo "A good idea is to set it to <hostname>.homenetwork <hostname> localhost"
-echo "Press any key"
+echo "Press enter"
 read -r
 nano -w /etc/hosts
 
 echo "You will now select the keymap."
 echo 'You probably want keymap="br-abnt2"'
-echo "Press any key"
+echo "Press enter"
 read -r
 nano -w /etc/conf.d/keymaps
 
 echo "Type the root password:"
 passwd
 
-echo "You will now review rc.conf. Press any key"
+echo "You will now review rc.conf. Press enter"
 read -r
 nano -w /etc/rc.conf
 
-echo "Finally, you will review the hwclock. Press any key"
+echo "Finally, you will review the hwclock. Press enter"
 read -r
 nano -w /etc/conf.d/hwclock
 

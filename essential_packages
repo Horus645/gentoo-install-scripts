@@ -4,5 +4,8 @@ app-eselect/eselect-sh
 app-eselect/eselect-repository
 app-portage/gentoolkit
 app-shells/dash
+app-shells/gentoo-zsh-completions
+app-shells/zsh
+app-shells/zsh-completions
 sys-apps/man-db
 sys-firmware/intel-microcode

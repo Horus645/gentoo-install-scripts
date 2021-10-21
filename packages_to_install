@@ -1,8 +1,5 @@
 app-editors/neovim
 app-office/libreoffice
-app-shells/gentoo-zsh-completions
-app-shells/zsh
-app-shells/zsh-completions
 app-misc/nnn
 app-text/zathura
 app-text/zathura-pdf-mupdf

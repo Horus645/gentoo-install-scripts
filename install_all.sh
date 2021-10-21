@@ -11,6 +11,7 @@
 # after the next script we will be emerging with git, so we need to get it now
 emerge --verbose dev-vcs/git || exit 1
 ./setup_portage_repos.sh && echo "Changed sync operation to git." || exit 1
+./setup_bleeding_edge_packages.sh && echo "Accept keywords set." || exit 1
 
 # emerging essential packages
 tr '\n' ' ' < essential_packages | xargs emerge -avt || exit 1
@@ -23,9 +24,7 @@ sleep 5 # let the user see we've changed it
 echo "Rebuilding grub..."
 grub-mkconfig -o /boot/grub/grub.cfg || exit 1
 
-./setup_bleeding_edge_packages.sh && echo "Accept keywords set." || exit 1
-
-useradd -m -G users,wheel,audio,video,games,usb -s /bin/bash horus && echo "Added user horus" || exit 1
+useradd -m -G users,wheel,audio,video,games,usb -s /bin/zsh horus && echo "Added user horus" || exit 1
 passwd horus || exit 1
 
 rm --verbose /stage3-*.tar.* || exit 1

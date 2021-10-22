@@ -8,25 +8,34 @@
 # It will also only run up until the 'chroot' part (the middle of
 # "installing base system" in gentoo's handbook)
 
-date
 while true; do
-echo "Is the date correct(UTC time)?[y/n]"
+	echo \
+"There are 3 things you must do before running this script:
+	1 - check your internet connection;
+	2 - setup your paritionning scheme
+	3 - mount everything (and activate swap, if you have it)
+
+	Have you done all this?[y/n]"
 	read  -r answer
 	case $answer in
-		[yY]*)
-			break
-			;;
-		[nN]*)
-			echo "Fix the date and run this script again."
-			exit 1
-			;;
-		*)
-			echo "Don't be a bitch; type either 'y' or 'n'."
-			;;
+		[yY]*) break ;;
+		[nN]*) echo "Then do them." && exit 1 ;;
+		*) echo "Don't be a bitch; type either 'y' or 'n'." ;;
 	esac
 done
 
-wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20211018T200943Z/stage3-amd64-openrc-20211018T200943Z.tar.xz
+date
+while true; do
+	echo "Is the date correct(UTC time)?[y/n]"
+	read  -r answer
+	case $answer in
+		[yY]*) break ;;
+		[nN]*) echo "Fix the date and run this script again." && exit 1 ;;
+		*) echo "Don't be a bitch; type either 'y' or 'n'."	;;
+	esac
+done
+
+wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20211018T200943Z/stage3-amd64-openrc-20211018T200943Z.tar.xz && exit 1
 
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 
@@ -36,7 +45,7 @@ What you need to do is set common_flags to "-march=skylake -O2 -pipe"
 Make sure that CFLAGS and CXXFLAGS are also set to common_flags
 Finally, if MAKEOPTS exists, set it to "-j12"
 
-Press anything to continue'
+Press enter to continue'
 read -r
 nano -w /mnt/gentoo/etc/portage/make.conf
 

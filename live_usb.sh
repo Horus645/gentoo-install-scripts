@@ -65,7 +65,9 @@ mount -v --make-rslave /mnt/gentoo/dev
 mount -v --bind /run /mnt/gentoo/run
 mount -v --make-slave /mnt/gentoo/run
 
-chroot /mnt/gentoo /bin/bash ./"${SCRIPT_DIR}"/inside_chroot.sh && cd && \
+mkdir -vp /mnt/gentoo/root/install_scripts
+cp -vr "${SCRIPT_DIR}/*" /mnt/gentoo/root/install_scripts
+chroot /mnt/gentoo /bin/bash /root/install_scripts/inside_chroot.sh && cd && \
 	umount -v -l /mnt/gentoo/dev/shm && umount -v -l /mnt/gentoo/dev/pts && \
 	umount -v -R /mnt/gentoo && reboot \
 	|| echo "Something went wrong, you will have to continue manually.

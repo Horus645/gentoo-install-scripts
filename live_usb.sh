@@ -19,7 +19,7 @@ while true; do
 	read  -r answer
 	case $answer in
 		[yY]*) break ;;
-		[nN]*) echo "Then do them." && exit 1 ;;
+		[nN]*) echo "Then do them." ; exit 1 ;;
 		*) echo "Don't be a bitch; type either 'y' or 'n'." ;;
 	esac
 done
@@ -30,12 +30,13 @@ while true; do
 	read  -r answer
 	case $answer in
 		[yY]*) break ;;
-		[nN]*) echo "Fix the date and run this script again." && exit 1 ;;
+		[nN]*) echo "Fix the date and run this script again." ; exit 1 ;;
 		*) echo "Don't be a bitch; type either 'y' or 'n'."	;;
 	esac
 done
 
-wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20211018T200943Z/stage3-amd64-openrc-20211018T200943Z.tar.xz && exit 1
+cd /mnt/gentoo || (echo "/mnt/gentoo does not exist!" ; exit 1)
+wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20211018T200943Z/stage3-amd64-openrc-20211018T200943Z.tar.xz || exit 1
 
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 

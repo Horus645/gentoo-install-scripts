@@ -7,6 +7,7 @@
 # "preparing the disks" part of gentoo's handbook
 # It will also only run up until the 'chroot' part (the middle of
 # "installing base system" in gentoo's handbook)
+SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 while true; do
 	echo \
@@ -64,7 +65,7 @@ mount -v --make-rslave /mnt/gentoo/dev
 mount -v --bind /run /mnt/gentoo/run
 mount -v --make-slave /mnt/gentoo/run
 
-chroot /mnt/gentoo /bin/bash ./inside_chroot.sh && cd && \
+chroot /mnt/gentoo /bin/bash ./"${SCRIPT_DIR}"/inside_chroot.sh && cd && \
 	umount -v -l /mnt/gentoo/dev/shm && umount -v -l /mnt/gentoo/dev/pts && \
 	umount -v -R /mnt/gentoo && reboot \
 	|| echo "Something went wrong, you will have to continue manually.

@@ -15,7 +15,7 @@ if grep -q CFLAGS $CONF_FILE && grep -q CXXFLAGS $CONF_FILE && grep -q COMMON_FL
 then
 	if sed -i 's/COMMON_FLAGS.*/COMMON_FLAGS="-march=skylake -O2 -pipe"/' $CONF_FILE
 	then
-		echo "Set COMMON_FLAGS"
+		echo "COMMON_FLAGS set"
 	else
 		nano -w $CONF_FILE
 	fi
@@ -39,24 +39,24 @@ grep -q "USE" "$CONF_FILE" || \
 'USE="alsa curl dbus elogind fmmpeg gtk magic opengl pulseaudio \
 qt5 threads vim-syntax vaapi vdpau vulkan X xwayland wayland \
 -bluetooth -cdda -cdr -css -cuda -dvd -dvdr -emacs -gnome -jack -kde \
--networkmanager -nvidia -systemd -telemetry -wifi"' >> "$CONF_FILE" && echo "Set USEFLAGS"
+-networkmanager -nvidia -systemd -telemetry -wifi"' >> "$CONF_FILE" && echo "USEFLAGS set"
 
 grep -q "ACCEPT_LICENSE" "$CONF_FILE" || \
 	echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"'  >> "$CONF_FILE" && \
-	echo "Set license"
+	echo "License set"
 
 grep -q "GRUB_PLATFORMS" "$CONF_FILE" || echo 'GRUB_PLATFORMS="efi-64"' >> "$CONF_FILE" \
-	&& echo "Set GRUB_PLATFORMS"
+	&& echo "GRUB_PLATFORMS set"
 
 grep -q "EMERGE_DEFAULT_OPTS" "$CONF_FILE" || \
-	echo 'MERGE_DEFAULT_OPTS="--ask --verbose --tree"' >> "$CONF_FILE" && \
-	echo "Set EMERGE_DEFAULT_OPTS"
+	echo 'EMERGE_DEFAULT_OPTS="--ask --verbose --tree"' >> "$CONF_FILE" && \
+	echo "EMERGE_DEFAULT_OPTS set"
 
 grep -q "PORTDIR_OVERLAY" "$CONF_FILE" || \
 	echo \
 '#PORTDIR_OVERLAY is where local ebuils may be stored without
 concern that will be deleted by updates. Default is not defined.
-PORTDIR_OVERLAY=/usr/local/portage' >> "$CONF_FILE" && echo "Set PORTDIR_OVERLAY"
+PORTDIR_OVERLAY=/usr/local/portage' >> "$CONF_FILE" && echo "PORTDIR_OVERLAY set"
 
 grep -q "VIDEO_CARDS" "$CONF_FILE" || echo 'VIDEO_CARDS="-* amdgpu radeonsi"' >> "$CONF_FILE" && \
-	echo "Set VIDEO_CARDS"
+	echo "VIDEO_CARDS set"

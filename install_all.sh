@@ -16,19 +16,6 @@ emerge --verbose dev-vcs/git || exit 1
 # emerging essential packages
 tr '\n' ' ' < essential_packages | xargs emerge -avt || exit 1
 
-eselect sh set dash && echo "Shell changed to dash!" || exit 1
-eselect sh list || exit 1
-sleep 5 # let the user see we've changed it
-
-# rebuild grub to load microcode
-echo "Rebuilding grub..."
-grub-mkconfig -o /boot/grub/grub.cfg || exit 1
-
-useradd -m -G users,wheel,audio,video,games,usb -s /bin/zsh horus && echo "Added user horus" || exit 1
-passwd horus || exit 1
-
-rm --verbose /stage3-*.tar.* || exit 1
-
 ./configure_base_system.sh || exit 1
 
 emerge --verbose app-misc/neofetch || exit 1

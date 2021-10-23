@@ -20,6 +20,8 @@ then
 	then
 		echo "COMMON_FLAGS set"
 	else
+		echo "Something went wrong when editing COMMON_FLAGS. Press enter to edit make.conf"
+		read -r
 		nano -w $CONF_FILE
 	fi
 else

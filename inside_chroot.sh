@@ -23,11 +23,6 @@ fi
 
 emerge --verbose --update --deep --newuse @world
 
-echo "Setting up /etc/portage/make.conf..."
-# this is AFTER the previous command because that one is meant to update according to our profile
-bash ${SCRIPT_DIR}/setup_make.conf.sh || exit 1
-echo "...done."
-
 # we use this command in the next script
 emerge --verbose app-portage/cpuid2cpuflags || exit 1
 bash ${SCRIPT_DIR}/setup_local_use_flags.sh && echo "Local use flags set up." || exit 1

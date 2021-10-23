@@ -41,15 +41,17 @@ wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/2021101
 
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 
-echo \
-'You will now configure the basics of make.conf.
-What you need to do is set common_flags to "-march=skylake -O2 -pipe"
-Make sure that CFLAGS and CXXFLAGS are also set to common_flags
-Finally, if MAKEOPTS exists, set it to "-j12"
-
-Press enter to continue'
-read -r
-nano -w /mnt/gentoo/etc/portage/make.conf
+echo "Setting up /mnt/gentoo/etc/portage/make.conf..."
+bash "${SCRIPT_DIR}"/setup_make.conf.sh || (echo "...failed! Exiting..." ; exit 1)
+echo "...done."
+cat /mnt/gentoo/etc/portage/make.conf
+echo "Is the above make.conf to your liking?[y for 'yes']"
+read -r answer
+if [ ! "$answer" = 'y' ] && [ ! "$answer" = 'Y' ] && [ ! "$answer" = 'yes' ]; then
+	echo "In that case, please edit what you don't like. Press enter when ready."
+	read -r
+	nano -w /mnt/gentoo/etc/portage/make.conf
+fi
 
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
 mkdir -v --parents  /mnt/gentoo/etc/portage/repos.conf

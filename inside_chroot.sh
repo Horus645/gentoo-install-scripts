@@ -13,12 +13,18 @@ eselect profile list | grep 'default/linux/amd64' | grep "desktop$" | sed 's/\([
 
 eselect profile list | grep -F '*' | grep 'default/linux/amd64' | grep -q "desktop$" || (echo "Couldn't set profile correctly" && exit 1)
 
-eselect profile list && sleep 5 # let the user see all is well
+eselect profile list
+echo "Is the above profile correct?[y for 'yes']"
+read -r answer
+if [ ! "$answer" = 'y' ] && [ ! "$answer" = 'Y' ] && [ ! "$answer" = 'yes' ]; then
+	echo "Well, then. Better stop I guess..."
+	exit 1
+fi
 
 emerge --verbose --update --deep --newuse @world
 
 echo "Setting up /etc/portage/make.conf..."
-#this is AFTER the previous command because that one is meant to update according to our profile
+# this is AFTER the previous command because that one is meant to update according to our profile
 bash ${SCRIPT_DIR}/setup_make.conf.sh || exit 1
 echo "...done."
 
@@ -39,14 +45,26 @@ locale-gen
 
 eselect locale list | grep "en_US.UTF-8 UTF-8" | sed 's/\([0-9]\).*/\1/' | tr -d [ | tr -d ' ' | xargs eselect locale set
 
-eselect locale list && sleep 5 # let the user see the selected locale
+eselect locale list
+echo "Is the above locale correct?[y for 'yes']"
+read -r answer
+if [ ! "$answer" = 'y' ] && [ ! "$answer" = 'Y' ] && [ ! "$answer" = 'yes' ]; then
+	echo "Well, then. Better stop I guess..."
+	exit 1
+fi
 
 env-update && . /etc/profile && export PS1="(chroot) ${PS1}"
 
 emerge --verbose sys-kernel/gentoo-sources app-arch/lz4
 
 eselect kernel set 1
-eselect kernel list && sleep 5
+eselect kernel list
+echo "Is the above kernel correct?[y for 'yes']"
+read -r answer
+if [ ! "$answer" = 'y' ] && [ ! "$answer" = 'Y' ] && [ ! "$answer" = 'yes' ]; then
+	echo "Well, then. Better stop I guess..."
+	exit 1
+fi
 
 cd /usr/src/linux || exit 1
 make menuconfig

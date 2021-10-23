@@ -10,7 +10,11 @@ CONF_FILE=/etc/portage/make.conf
 
 # Bellow, we always make sure to only set the option if it wasn't already set
 
-grep -q "MAKEOPTS" "$CONF_FILE" || echo 'MAKEOPTS="-j12"' >> "$CONF_FILE" && echo "Set MAKEOPTS"
+sed -i 's/COMMON_FLAGS.*/COMMON_FLAGS="-march=skylake -O2 -pipe"/' $CONF_FILE \
+	&& echo "Set COMMON_FLAGS" || nano -w $CONF_FILE
+
+grep -q "MAKEOPTS" "$CONF_FILE" || echo 'MAKEOPTS="-j12"' >> "$CONF_FILE" && \
+	echo "Set MAKEOPTS" || nano -w $CONF_FILE
 
 #vaapi -- ?
 grep -q "USE" "$CONF_FILE" || \

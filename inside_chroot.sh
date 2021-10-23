@@ -27,16 +27,16 @@ emerge --verbose --update --deep --newuse @world
 emerge --verbose app-portage/cpuid2cpuflags || exit 1
 bash ${SCRIPT_DIR}/setup_local_use_flags.sh && echo "Local use flags set up." || exit 1
 
-echo "Brazil/East" > /etc/timezone && emerge --config sys-libs/timezone-data
+echo "Brazil/East" > /etc/timezone && emerge --config sys-libs/timezone-data && echo "Timezone set"
 
 echo \
 "en_US ISO-8859-1
 en_US.UTF-8 UTF-8
 pt_BR ISO-8859-1
 pt_BR.UTF-8 UTF-8
-" > /etc/locale.gen
+" > /etc/locale.gen && echo "Edited locale.gen"
 
-locale-gen
+locale-gen && echo "Generated locales"
 
 eselect locale list | grep "en_US.UTF-8 UTF-8" | sed 's/\([0-9]\).*/\1/' | tr -d [ | tr -d ' ' | xargs eselect locale set
 

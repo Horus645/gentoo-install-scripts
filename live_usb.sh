@@ -37,6 +37,7 @@ while true; do
 done
 
 cd /mnt/gentoo || (echo "/mnt/gentoo does not exist!" ; exit 1)
+echo "Now in $(pwd)"
 wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20211018T200943Z/stage3-amd64-openrc-20211018T200943Z.tar.xz || exit 1
 
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner

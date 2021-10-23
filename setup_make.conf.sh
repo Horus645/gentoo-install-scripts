@@ -7,16 +7,33 @@
 
 
 CONF_FILE=/etc/portage/make.conf
+[ -f $CONF_FILE ] && touch $CONF_FILE
 
 # Bellow, we always make sure to only set the option if it wasn't already set
 
-sed -i 's/COMMON_FLAGS.*/COMMON_FLAGS="-march=skylake -O2 -pipe"/' $CONF_FILE \
-	&& echo "Set COMMON_FLAGS" || nano -w $CONF_FILE
+if grep -q CFLAGS $CONF_FILE && grep -q CXXFLAGS $CONF_FILE && grep -q COMMON_FLAGS $CONF_FILE
+then
+	if sed -i 's/COMMON_FLAGS.*/COMMON_FLAGS="-march=skylake -O2 -pipe"/' $CONF_FILE
+	then
+		echo "Set COMMON_FLAGS"
+	else
+		nano -w $CONF_FILE
+	fi
+else
+	echo "This make.conf file is weird. You'll have to edit manually. Press enter."
+	read -r
+	nano -w $CONF_FILE
+fi
 
-grep -q "MAKEOPTS" "$CONF_FILE" || echo 'MAKEOPTS="-j12"' >> "$CONF_FILE" && \
-	echo "Set MAKEOPTS" || nano -w $CONF_FILE
+if ! grep -q "MAKEOPTS" "$CONF_FILE"; then
+	echo 'MAKEOPTS="-j12"' >> "$CONF_FILE"
+	echo "MAKEOPTS set"
+else
+	echo "MAKEOPTS already exits. Please review it. Press enter."
+	read -r
+	nano -w $CONF_FILE
+fi
 
-#vaapi -- ?
 grep -q "USE" "$CONF_FILE" || \
 	echo \
 'USE="alsa curl dbus elogind fmmpeg gtk magic opengl pulseaudio \

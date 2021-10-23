@@ -5,9 +5,12 @@
 # Make sure we are running as root:
 [ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit
 
-
-CONF_FILE=/etc/portage/make.conf
-[ -f $CONF_FILE ] && touch $CONF_FILE
+# This will make the script work inside and outside the chroot environment
+if [ -d /mnt/gentoo ]; then
+	CONF_FILE=/mnt/gentoo/etc/portage/make.conf
+else
+	CONF_FILE=/etc/portage/make.conf
+fi
 
 # Bellow, we always make sure to only set the option if it wasn't already set
 

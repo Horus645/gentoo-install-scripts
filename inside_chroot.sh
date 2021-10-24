@@ -23,9 +23,8 @@ export PS1="(chroot) ${PS1}"
 
 emerge-webrsync
 
-#This next line is wrong!!
-eselect profile list | grep 'default/linux/amd64' | grep "desktop$" | sed 's/\([0-9]\).*/\1/' | tr -d [ | tr -d ' ' | xargs eselect profile set
-eselect profile list | grep -F '*' | grep 'default/linux/amd64' | grep -q "desktop$" || (echo "Couldn't set profile correctly" && exit 1)
+eselect profile list | grep 'default/linux/amd64' | grep "desktop (stable)$" | sed 's/\([0-9]\).*/\1/' | tr -d [ | tr -d ' ' | xargs eselect profile set
+eselect profile list | grep -F '*' | grep 'default/linux/amd64' | grep -q "desktop$" || echo "Couldn't set profile correctly" && exit 1
 confirm_eselect_automation "profile"
 
 emerge --verbose --update --deep --newuse @world

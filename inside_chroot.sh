@@ -27,13 +27,14 @@ eselect profile list | grep 'default/linux/amd64.*/desktop (stable)' | sed 's/\(
 eselect profile list | grep -F '*' | grep -q 'default/linux/amd64/.*/desktop (stable)' || echo "Couldn't set profile correctly" && exit 1
 confirm_eselect_automation "profile"
 
-emerge --verbose --update --deep --newuse @world
+# this doesn't work if something fails (circular dependencies)
+emerge --verbose --update --deep --newuse @world || exit 1
 
 # we use this command in the next script
 emerge --verbose app-portage/cpuid2cpuflags || exit 1
 "${SCRIPT_DIR}"/setup_local_use_flags.sh && echo "Local use flags set up." || exit 1
 
-echo "Brazil/East" > /etc/timezone && emerge --config sys-libs/timezone-data && echo "Timezone set"
+echo "Brazil/East" > /etc/timezone && emerge --config sys-libs/timezone-data && echo "Timezone set" || exit 1
 
 echo \
 "en_US ISO-8859-1

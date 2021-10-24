@@ -16,7 +16,7 @@ fi
 
 if grep -q CFLAGS $CONF_FILE && grep -q CXXFLAGS $CONF_FILE && grep -q COMMON_FLAGS $CONF_FILE
 then
-	if sed -i 's/COMMON_FLAGS.*/COMMON_FLAGS="-march=skylake -O2 -pipe"/' $CONF_FILE
+	if sed -i 's/COMMON_FLAGS=.*/COMMON_FLAGS="-march=skylake -O2 -pipe"/' $CONF_FILE
 	then
 		echo "COMMON_FLAGS set"
 	else

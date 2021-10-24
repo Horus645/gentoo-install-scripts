@@ -50,8 +50,11 @@ echo "Setting up /mnt/gentoo/etc/portage/make.conf..."
 "${SCRIPT_DIR}"/setup_make.conf.sh || (echo "...failed! Exiting..." ; exit 1)
 "$SCRIPT_DIR"/utils/warn_and_edit.sh "/mnt/gentoo/etc/portage/make.conf" "...done."
 
-"$SCRIPT_DIR"/utils/pause_with_msg.sh "In this next menu, you can select things by pressing <space>"
-mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+if type "mirrorselect" > /dev/null; then
+	"$SCRIPT_DIR"/utils/pause_with_msg.sh "In this next menu, you can select things by pressing <space>"
+	mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+fi
+
 mkdir -v --parents  /mnt/gentoo/etc/portage/repos.conf
 cp -v /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
 

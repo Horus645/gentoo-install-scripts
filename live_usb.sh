@@ -45,15 +45,10 @@ tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 echo "Setting up /mnt/gentoo/etc/portage/make.conf..."
 bash "${SCRIPT_DIR}"/setup_make.conf.sh || (echo "...failed! Exiting..." ; exit 1)
 echo "...done."
-cat /mnt/gentoo/etc/portage/make.conf
-echo "Is the above make.conf to your liking?[y for 'yes']"
-read -r answer
-if [ ! "$answer" = 'y' ] && [ ! "$answer" = 'Y' ] && [ ! "$answer" = 'yes' ]; then
-	echo "In that case, please edit what you don't like. Press enter when ready."
-	read -r
-	nano -w /mnt/gentoo/etc/portage/make.conf
-fi
 
+"$SCRIPT_DIR"/utils/confirm_edit.sh "/mnt/gentoo/etc/portage/make.conf"
+
+"$SCRIPT_DIR"/utils/pause_with_msg.sh "In this next menu, you can select things by pressing <space>"
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
 mkdir -v --parents  /mnt/gentoo/etc/portage/repos.conf
 cp -v /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf

@@ -7,6 +7,10 @@
 # "preparing the disks" part of gentoo's handbook
 # It will also only run up until the 'chroot' part (the middle of
 # "installing base system" in gentoo's handbook)
+
+# Make sure we are running as root:
+[ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit
+
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 while true; do

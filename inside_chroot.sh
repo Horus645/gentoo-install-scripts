@@ -1,5 +1,9 @@
 #!/bin/sh
 # This script will run inside the chrooted environment
+
+# Make sure we are running as root:
+[ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit
+
 confirm_eselect_automation(){
 	eselect "$1" list
 	echo "Is the above ${1} correct?[y for 'yes']"

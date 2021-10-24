@@ -3,4 +3,4 @@
 echo "$1
 
 Press enter to continue."
-read -r
+read -r temp

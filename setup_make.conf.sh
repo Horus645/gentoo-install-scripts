@@ -60,8 +60,8 @@ grep -q "EMERGE_DEFAULT_OPTS" "$CONF_FILE" || \
 grep -q "PORTDIR_OVERLAY" "$CONF_FILE" || \
 	echo \
 '#PORTDIR_OVERLAY is where local ebuils may be stored without
-concern that will be deleted by updates. Default is not defined.
+#concern that will be deleted by updates. Default is not defined.
 PORTDIR_OVERLAY=/usr/local/portage' >> "$CONF_FILE" && echo "PORTDIR_OVERLAY set"
 
-grep -q "VIDEO_CARDS" "$CONF_FILE" || echo 'VIDEO_CARDS="-* amdgpu radeonsi"' >> "$CONF_FILE" && \
+grep -q "VIDEO_CARDS" "$CONF_FILE" || echo 'VIDEO_CARDS="amdgpu radeonsi -nvidia"' >> "$CONF_FILE" && \
 	echo "VIDEO_CARDS set"

@@ -4,7 +4,7 @@ SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 	echo "Specify the file to edit, and optionally a message to print before editing it."\
 	&& exit 1
 
-"${SCRIPT_DIR}"/utils/pause_with_msg.sh "$2"
+"${SCRIPT_DIR}"/pause_with_msg.sh "$2"
 nano -w "$1"
 while true; do
 	cat "$1"

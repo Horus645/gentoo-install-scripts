@@ -69,7 +69,7 @@ mount -v --bind /run /mnt/gentoo/run
 mount -v --make-slave /mnt/gentoo/run
 
 mkdir -vp /mnt/gentoo/root/install_scripts
-cp -vr "${SCRIPT_DIR}/*" /mnt/gentoo/root/install_scripts
+cp -vr "${SCRIPT_DIR}"/* /mnt/gentoo/root/install_scripts
 chroot /mnt/gentoo /bin/bash /root/install_scripts/inside_chroot.sh && cd && \
 	umount -v -l /mnt/gentoo/dev/shm && umount -v -l /mnt/gentoo/dev/pts && \
 	umount -v -R /mnt/gentoo && echo "You may now reboot the system" \

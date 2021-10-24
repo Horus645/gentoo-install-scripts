@@ -93,7 +93,7 @@ A good idea is to set it to <hostname>.homenetwork <hostname> localhost"
 
 "${SCRIPT_DIR}"/utils/warn_and_edit.sh '/etc/conf.d/keymaps' "You will now select the keymap."
 
-echo "Type the root password:"
+echo "Type the root password:" #This could go wrong if the doesn't have an us keyboard
 passwd
 
 "${SCRIPT_DIR}"/utils/warn_and_edit.sh "/etc/rc.conf" "Editing rc.conf."

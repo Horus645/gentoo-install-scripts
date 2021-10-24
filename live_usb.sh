@@ -13,8 +13,8 @@ while true; do
 	echo \
 "There are 3 things you must do before running this script:
 	1 - check your internet connection;
-	2 - setup your paritionning scheme
-	3 - mount everything (and activate swap, if you have it)
+	2 - setup your partitionning scheme
+	3 - mount everything in /mnt/gentoo (and activate swap, if you have it)
 
 	Have you done all this?[y/n]"
 	read  -r answer
@@ -72,6 +72,6 @@ mkdir -vp /mnt/gentoo/root/install_scripts
 cp -vr "${SCRIPT_DIR}/*" /mnt/gentoo/root/install_scripts
 chroot /mnt/gentoo /bin/bash /root/install_scripts/inside_chroot.sh && cd && \
 	umount -v -l /mnt/gentoo/dev/shm && umount -v -l /mnt/gentoo/dev/pts && \
-	umount -v -R /mnt/gentoo && reboot \
+	umount -v -R /mnt/gentoo && echo "You may now reboot the system" \
 	|| echo "Something went wrong, you will have to continue manually.
 	Begin by running 'chroot /mnt/gentoo /bin/bash'"

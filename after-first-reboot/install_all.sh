@@ -7,6 +7,8 @@
 
 # Make sure we are running as root:
 [ "$(id -u)" -ne 0 ] && echo "Must run as root" && exit 1
+[ "$(pwd | xargs basename)" != "after-first-reboot" ] && \
+	echo "Must run from 'after-first-reboot' folder" && exit
 
 # after the next script we will be emerging with git, so we need to get it now
 emerge --verbose dev-vcs/git || exit 1

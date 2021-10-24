@@ -27,7 +27,7 @@ emerge --verbose --update --deep --newuse @world
 
 # we use this command in the next script
 emerge --verbose app-portage/cpuid2cpuflags || exit 1
-bash ${SCRIPT_DIR}/setup_local_use_flags.sh && echo "Local use flags set up." || exit 1
+"${SCRIPT_DIR}"/setup_local_use_flags.sh && echo "Local use flags set up." || exit 1
 
 echo "Brazil/East" > /etc/timezone && emerge --config sys-libs/timezone-data && echo "Timezone set"
 
@@ -77,45 +77,30 @@ echo "...done."
 
 lsblk
 blkid
-"${SCRIPT_DIR}"/utils/pause_with_msg.sh "You will now edit the fstab file. Make sure to take note of the above."
-nano -w /etc/fstab
-"${SCRIPT_DIR}"/utils/confirm_edit.sh "/etc/fstab"
+"${SCRIPT_DIR}"/utils/warn_and_edit.sh '/etc/fstab' 'You will now edit fstab. Take note of the above'
 
-echo "Type in the desired hostname:"
-read -r TYPED_HOSTNAME
-echo \
-"# Hostname fallback if /etc/hostname does not exit
-hostname=\"${TYPED_HOSTNAME}\"" > /etc/conf.d/hostname
-"${SCRIPT_DIR}"/utils/confirm_edit.sh "/etc/conf.d/hostname"
+"${SCRIPT_DIR}"/utils/warn_and_edit.sh '/etc/conf.d/hostname' 'You will now set the hostname.'
 
 emerge --verbose --noreplace net-misc/netifrc
-"${SCRIPT_DIR}"/utils/pause_with_msg.sh 'Now set config_eth0="dhcp".'
-nano -w /etc/conf.d/net
-"${SCRIPT_DIR}"/utils/confirm_edit.sh "/etc/conf.d/net"
+"${SCRIPT_DIR}"/utils/warn_and_edit.sh '/etc/conf.d/net' 'Now set config_eth0="dhcp".'
 
 cd /etc/init.d || exit 1
 ln -s net.lo net.eth0
 rc-update add net.eth0 default
 
-"${SCRIPT_DIR}"/utils/pause_with_msg.sh "Now you will edit the hosts file
+"${SCRIPT_DIR}"/utils/warn_and_edit.sh '/etc/hosts' "Now you will edit the hosts file
 A good idea is to set it to <hostname>.homenetwork <hostname> localhost"
-nano -w /etc/hosts
-"${SCRIPT_DIR}"/utils/confirm_edit.sh "/etc/hosts"
 
-"${SCRIPT_DIR}"/utils/pause_with_msg.sh "You will now select the keymap."
-nano -w /etc/conf.d/keymaps
-"${SCRIPT_DIR}"/utils/confirm_edit.sh "/etc/conf.d/keymaps"
+"${SCRIPT_DIR}"/utils/warn_and_edit.sh '/etc/conf.d/keymaps' "You will now select the keymap."
 
 echo "Type the root password:"
 passwd
 
-"${SCRIPT_DIR}"/utils/confirm_edit.sh "/etc/rc.conf"
-
-"${SCRIPT_DIR}"/utils/confirm_edit.sh "/etc/conf.d/hwclock"
+"${SCRIPT_DIR}"/utils/warn_and_edit.sh "/etc/rc.conf" "Editing rc.conf."
+"${SCRIPT_DIR}"/utils/warn_and_edit.sh "/etc/conf.d/hwclock" "Editing hwclock."
 
 emerge --verbose app-admin/sysklogd && rc-update add sysklogd default
 emerge --verbose net-misc/dhcpcd
-
 emerge --verbose sys-process/cronie && rc-update add cronie default
 
 echo "Would you like to install grub?[y for yes]"

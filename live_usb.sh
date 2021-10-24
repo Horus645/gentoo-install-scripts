@@ -43,10 +43,8 @@ wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/2021101
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 
 echo "Setting up /mnt/gentoo/etc/portage/make.conf..."
-bash "${SCRIPT_DIR}"/setup_make.conf.sh || (echo "...failed! Exiting..." ; exit 1)
-echo "...done."
-
-"$SCRIPT_DIR"/utils/confirm_edit.sh "/mnt/gentoo/etc/portage/make.conf"
+"${SCRIPT_DIR}"/setup_make.conf.sh || (echo "...failed! Exiting..." ; exit 1)
+"$SCRIPT_DIR"/utils/warn_and_edit.sh "/mnt/gentoo/etc/portage/make.conf" "...done."
 
 "$SCRIPT_DIR"/utils/pause_with_msg.sh "In this next menu, you can select things by pressing <space>"
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf

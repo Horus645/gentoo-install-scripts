@@ -1,7 +1,11 @@
 #!/bin/sh
-[ $# -lt 1 ] && echo "Specify the file that was edited." && exit 1
-
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+[ $# -lt 1 ] && \
+	echo "Specify the file to edit, and optionally a message to print before editing it."\
+	&& exit 1
+
+"${SCRIPT_DIR}"/utils/pause_with_msg.sh "$2"
+nano -w "$1"
 while true; do
 	cat "$1"
 	echo "Is the above ${1} to your liking?[y/n]"
